@@ -21,16 +21,25 @@ export const show = (req, res) =>
     }
   })
 
-export const index = (req, res) =>
+ export const index = (req, res) =>
   sendAllfaculty(res);
 
 export const searchfaculty = (req, res) => {
-  console.log(req.query);
-  faculty.find({ name: { '$regex' : req.query.string, '$options' : 'i' }}).exec((err, results) => {
+  faculty.find({gender:req.query.gender},(err,data) => {
     if (err) {
       res.send(err);
     } else {
-      res.send(results);
+      res.send(data);
+    }
+  })
+}
+
+export const search = (req, res) => {
+  faculty.find({qualification:req.query.qualification},(err,data) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(data);
     }
   })
 }
