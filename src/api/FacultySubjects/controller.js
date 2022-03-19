@@ -21,17 +21,15 @@ FacultySubjects.findById(req.params.id, (err, result) => {
 export const index = (req, res) =>
   sendAllFacultySubjects(res);
 
-export const searchFacultySubjects = (req, res) => {
-  console.log(req.query);
-  FacultySubjects.find({ name: { '$regex' : req.query.string, '$options' : 'i' }}).exec((err, results) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send(results);
-    }
-  })
-}
-
+  export const searchFacultySubjects = (req, res) => {
+    FacultySubjects.find({gender:req.query.gender},(err,data) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send(data);
+      }
+    })
+  }
 export const update = (req, res) => {
   FacultySubjects.findByIdAndUpdate(req.params.id, req.body, { new: true}, (err, updatedObj) => {
     if (err) {

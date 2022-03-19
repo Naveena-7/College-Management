@@ -6,7 +6,8 @@ import {
   show,
   update,
   destroy,
-  searchfaculty
+  searchfaculty,
+  search
 } from './controller'
 
 const router = new Router()
@@ -19,6 +20,12 @@ router.put('/:id', update)
 
 //GET Request http://localhost:8080/faculty/search
 router.get('/search', searchfaculty)
+
+
+
+//GET Request http://localhost:8080/faculty/search
+router.get('/search', search)
+
 
 //GET Request http://localhost:8080/faculty
 router.get('/', index)
