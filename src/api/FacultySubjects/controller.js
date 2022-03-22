@@ -51,11 +51,12 @@ FacultySubjects.findByIdAndRemove(req.params.id, (err, deletedObj) => {
   }); 
 
   const sendAllFacultySubjects = (res) => {
-    FacultySubjects.find((er, FacultySubjects) => {
-      if (!er) {
-        res.send(FacultySubjects);
-      } else {
-        res.send(er);
-      }
+    FacultySubjects.find()
+    .populate('faculty')
+    .then(results =>{
+      res.send(results);
+    })
+    .catch(err=>{
+      res.send(err);
     })
   }

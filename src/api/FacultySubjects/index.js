@@ -16,7 +16,6 @@ router.post('/', create)
 
 router.put('/:id', update)
 
-
 router.get('/search', searchFacultySubjects)
 
 

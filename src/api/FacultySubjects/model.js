@@ -5,6 +5,14 @@ const FacultySubjectsSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    faculty:[
+
+        {
+        type:mongoose.SchemaTypes.ObjectId,
+        ref:'faculty'
+    }
+    
+],
     gender: {
         type: String,
         required: true,
