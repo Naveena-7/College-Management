@@ -22,8 +22,10 @@ router.put('/:id', update)
 router.get('/search', searchfaculty)
 
 
+
 //GET Request http://localhost:8080/faculty/search
 router.get('/search', search)
+
 
 //GET Request http://localhost:8080/faculty
 router.get('/', index)

@@ -14,12 +14,15 @@ const router = new Router()
 
 router.post('/', create)
 
+
+
 router.put('/:id', update)
 
 router.get('/search', searchFacultySubjects)
 
 
 router.get('/', index)
+
 
 router.get('/:id', show)
 
