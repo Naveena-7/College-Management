@@ -1,9 +1,14 @@
 import mongoose from 'mongoose'
 
-const facultySchema = new mongoose.Schema({
+const EmployeesSchema = new mongoose.Schema({
     name:{
         type: String,
         required: true
+    },
+    EmployeesType:{
+       type:String,
+       enum:["Teaching","Non-Teaching"],
+       required:true
     },
     desgination:{
         type: String,
@@ -34,21 +39,10 @@ const facultySchema = new mongoose.Schema({
         required: true,
         enum: ["Male", "Female", "Others"]
     },
-    branch: {
-        type: String,
-        required: true,
-        enum: ["ECE", "CSE", "EEE", "MECH", "IT","CIVIL"]
-    },
-    Employees:[
-        {
-        type:mongoose.SchemaTypes.ObjectId,
-        ref:'Employees'
-    }
-]
 }, {
     timestamps: true
 });
 
-const model = mongoose.model('faculty', facultySchema)
+const model = mongoose.model('Employees', EmployeesSchema)
 
 export default model

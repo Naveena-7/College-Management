@@ -64,12 +64,23 @@ faculty.findByIdAndRemove(req.params.id, (err, deletedObj) => {
     }
   }); 
 
+  // const sendAllfaculty = (res) => {
+  //   faculty.find((er, faculty) => {
+  //     if (!er) {
+  //       res.send(faculty);
+  //     } else {
+  //       res.send(er);
+  //     }
+  //   })
+  // }
+
   const sendAllfaculty = (res) => {
-    faculty.find((er, faculty) => {
-      if (!er) {
-        res.send(faculty);
-      } else {
-        res.send(er);
-      }
+    faculty.find()
+    .populate('Employees')
+    .then(results =>{
+      res.send(results);
+    })
+    .catch(err=>{
+      res.send(err);
     })
   }

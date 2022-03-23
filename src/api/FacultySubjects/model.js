@@ -6,7 +6,6 @@ const FacultySubjectsSchema = new mongoose.Schema({
         required: true
     },
     faculty:[
-
         {
         type:mongoose.SchemaTypes.ObjectId,
         ref:'faculty'

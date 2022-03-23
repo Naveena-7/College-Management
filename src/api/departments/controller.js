@@ -1,4 +1,8 @@
+
+
 import Departments from './model';
+
+
 export const create = (req, res) => {
   Departments.create(req.body, (err, result) => {
     if (err) {
