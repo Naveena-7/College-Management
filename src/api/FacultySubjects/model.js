@@ -9,8 +9,7 @@ const FacultySubjectsSchema = new mongoose.Schema({
         {
         type:mongoose.SchemaTypes.ObjectId,
         ref:'faculty'
-    }
-    
+        }  
 ],
     gender: {
         type: String,

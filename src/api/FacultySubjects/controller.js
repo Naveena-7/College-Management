@@ -1,4 +1,7 @@
+
+
 import FacultySubjects from './model';
+
 export const create = (req, res) => {
   FacultySubjects.create(req.body, (err, result) => {
     if (err) {
@@ -52,7 +55,7 @@ FacultySubjects.findByIdAndRemove(req.params.id, (err, deletedObj) => {
 
   const sendAllFacultySubjects = (res) => {
     FacultySubjects.find()
-    .populate('faculty')
+     .populate('faculty')
     .then(results =>{
       res.send(results);
     })
@@ -60,3 +63,5 @@ FacultySubjects.findByIdAndRemove(req.params.id, (err, deletedObj) => {
       res.send(err);
     })
   }
+
+
