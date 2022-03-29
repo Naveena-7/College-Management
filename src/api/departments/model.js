@@ -10,7 +10,13 @@ const departmentSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true
-    }
+    },
+    faculty:[
+        {
+        type:mongoose.SchemaTypes.ObjectId,
+        ref:'faculty'
+        }  
+],
 }, {
     timestamps: true
 });

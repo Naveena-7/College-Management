@@ -1,6 +1,14 @@
 import mongoose from 'mongoose'
 
 const EmployeesSchema = new mongoose.Schema({
+
+    userID:{
+        type:mongoose.SchemaTypes.ObjectId,
+        ref:'Users',
+        required:true,
+        unique:true
+        },
+        
     name:{
         type: String,
         required: true

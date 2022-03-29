@@ -7,6 +7,7 @@ import FacultySubjects from './FacultySubjects'
 import AcadamicYears from './AcadamicYears'
 import marks from './marks'
 import Employees from  './Employees'
+import Users from  './Users'
 
 
 const router = new Router()
@@ -18,5 +19,6 @@ router.use('/FacultySubjects',FacultySubjects)
 router.use('/AcadamicYears',AcadamicYears)
 router.use('/marks',marks)
 router.use('/Employees',Employees)
+router.use('/Users',Users)
 
 export default router
