@@ -41,12 +41,16 @@ const EmployeesSchema = new mongoose.Schema({
             message: "Please enter valid email"
         }
     },
-  
     gender: {
         type: String,
         required: true,
         enum: ["Male", "Female", "Others"]
     },
+    createdBy:{
+            type:mongoose.SchemaTypes.ObjectId,
+            ref:'Users',
+            required:true
+            },
 }, {
     timestamps: true
 });

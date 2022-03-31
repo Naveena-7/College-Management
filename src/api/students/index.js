@@ -1,4 +1,8 @@
+
 import { Router } from 'express'
+
+import {checkAuth} from '../helpers' 
+
 
 import {
   create,
@@ -6,28 +10,28 @@ import {
   show,
   update,
   destroy,
-  searchStudent
+  searchStudent,
+  showMyProfile,
+  updateprofile
 } from './controller'
 
 const router = new Router()
 
-//POST Request http://localhost:8080/students
-router.post('/', create)
+router.post('/', checkAuth(true,['ADMIN']), create)
 
-//PUT Request http://localhost:8080/students/123
-router.put('/:id', update)
+router.put('/self-update',checkAuth(true),updateprofile)
 
-//GET Request http://localhost:8080/students/search
-router.get('/search', searchStudent)
+router.put('/:id',  checkAuth(true,['ADMIN']), update)
 
-//GET Request http://localhost:8080/students
-router.get('/', index)
+router.get('/search', checkAuth(true,['ADMIN','FACULTY']), searchStudent)
 
-//GET Request http://localhost:8080/students/123
-router.get('/:id', show)
+router.get('/',  checkAuth(true,['ADMIN','FACULTY']) ,index)
 
-//DELETE Request http://localhost:8080/students/123
-router.delete('/:id', destroy)
+router.get('/me' ,checkAuth(true) , showMyProfile)
 
+router.get('/:id', checkAuth(true,['ADMIN','FACULTY']), show)
 
+router.delete('/:id', checkAuth(true,['ADMIN']), destroy)
+
+ // need to write another method to see his/her details as a student
 export default router

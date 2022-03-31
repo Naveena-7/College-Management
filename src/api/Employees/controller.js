@@ -3,10 +3,23 @@
 import Employees from './model';
 
 export const create = (req, res) => {
+  const employees=req.body;
+  employees.createdBy = req.User.id;
   Employees.create(req.body, (err, result) => {
     if (err) {
       res.send(err);
     } else {
+      res.send(result);
+    }
+  })
+}
+
+export const showMyProfile = (req,res) =>{
+  Employees.findOne({userID :req.User.id}, (err, result) => {
+    if (err) {
+      res.send(err);
+    } else {
+     
       res.send(result);
     }
   })
@@ -43,6 +56,28 @@ export const search = (req, res) => {
     }
   })
 }
+
+
+export const updateprofile = (req, res) => {
+  const updatedObj = {};
+  if(req.body.name){
+    updatedObj['name'] = req.body.name
+  }
+  if(req.body.email){
+    updatedObj['email'] = req.body.email
+  }
+  if(req.body.qualification){
+    updatedObj['qualification'] = req.body.qualification
+  }
+  Employees.findOneAndUpdate({ userID : req.User.id }, updatedObj, { new: true}, (err, updatedObj) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(updatedObj);
+    }
+  })
+}
+
 
 export const update = (req, res) => {
   Employees.findByIdAndUpdate(req.params.id, req.body, { new: true}, (err, updatedObj) => {

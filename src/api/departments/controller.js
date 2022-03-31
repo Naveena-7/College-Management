@@ -4,7 +4,9 @@ import Departments from './model';
 
 
 export const create = (req, res) => {
-  Departments.create(req.body, (err, result) => {
+const Department = req.body;
+Department.createdby = req.body.id;
+Departments.create(req.body, (err, result) => {
     if (err) {
       res.send(err);
     } else {

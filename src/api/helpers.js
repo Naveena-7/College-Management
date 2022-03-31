@@ -1,28 +1,54 @@
+
 import jwt from 'jsonwebtoken';
 
-export const verifyToken =(req) =>{
-     
-     const token = extractToken(req);
-     
-     if(!token){
-         return false;
-     }
+ const sendErrorResponse=(res,code,message)=>{
+    res.status(code);
+    res.send({ error:true , message});
+ }
 
-     let data = null;
-     try{
-      data = jwt.verify(token ,'MY-PROJECT-KEY');
-     }
-     catch(err){
-    console.log("Invaild token");
-     }
+export const checkAuth = (authenticationRequired=false,requiredRoles=[])=> (req,res,next)   =>{
+     console.log(authenticationRequired,requiredRoles ,'authenticationRequired,requiredRoles');
+    if(authenticationRequired){
+     
+      const token = extractToken(req);
+      if(!token){
+        sendErrorResponse(res,401,"Unauthenticated  user.");
+        }else{
+            let User = null;
+            try{
+                User = jwt.verify(token ,'MY-PROJECT-KEY');
+            }
+           catch(err){
+            sendErrorResponse(res,401,"Unauthenticated user.Invalid/Expired token.");
+           }
+      
+           if(User){
+          req.User=User; //add logged in user data in to the request sothat next function can use user data
+               if(requiredRoles && requiredRoles.length > 0) {
+                   if(requiredRoles.includes(User.role)){
 
-     if(data){
-         return data;
-     }
-     else{
-         return false
-     }
+                    next();  // Authentication passed And Authorization passed
+                   }else{
+                    sendErrorResponse(res,401,"You are not authorised to perform this action.");
+                   }
+               
+               }else{
+                next();  // Authentication passed but Authorization  is not needed
+               }
+           
+           }
+        //    else{
+        //     sendErrorResponse(res,401,"Unauthenticated  user.");
+        //    }
+        }
+   
+    
+    }else{
+        next(); //No authentication And authorization needed
+    }
 }
+    
+
 
 function extractToken (req) {
     if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {

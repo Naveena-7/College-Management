@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import { checkAuth } from '../helpers'
 
 import {
   create,
@@ -7,24 +8,30 @@ import {
   update,
   destroy,
   searchEmployees,
-  search
+  search,
+  showMyProfile,
+  updateprofile
 } from './controller'
 
 const router = new Router()
 
-router.post('/', create)
+router.post('/', checkAuth(true,['ADMIN']), create)
 
-router.put('/:id', update)
+router.put('/self-update', checkAuth(true),updateprofile)
 
-router.get('/search', searchEmployees)
+router.put('/:id', checkAuth(true,['ADMIN']),update)
 
-router.get('/search', search)
+router.get('/search', checkAuth(true),searchEmployees)
 
-router.get('/', index)
+router.get('/search', checkAuth(true),search)
 
-router.get('/:id', show)
+router.get('/', checkAuth(true),index)
 
-router.delete('/:id', destroy)
+router.get('/me' ,checkAuth(true) , showMyProfile)
+
+router.get('/:id',checkAuth(true), show)
+
+router.delete('/:id', checkAuth(true,['ADMIN']),destroy)
 
 
 export default router
