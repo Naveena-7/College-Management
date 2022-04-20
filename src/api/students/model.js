@@ -2,12 +2,12 @@ import mongoose from 'mongoose'
 
 const studentSchema = new mongoose.Schema({
 
-    userID:{
-    type:mongoose.SchemaTypes.ObjectId,
-    ref:'Users',
-    required:true,
-    unique:true
-    },
+    // userID:{
+    // type:mongoose.SchemaTypes.ObjectId,
+    // ref:'Users',
+    // required:true,
+    // unique:true
+    // },
     name:{
         type: String,
         required: true
@@ -34,18 +34,18 @@ const studentSchema = new mongoose.Schema({
     gender: {
         type: String,
         required: true,
-        enum: ["Male", "Female", "Others"]
+        // enum: ["Male", "Female", "Others"]
     },
     branch: {
         type: String,
         required: true,
-        enum: ["ECE", "CSE", "EEE", "MECH", "IT"]
+        // enum: ["ECE", "CSE", "EEE", "MECH", "IT"]
     },
-    CreatedBy :{
-        type:mongoose.SchemaTypes.ObjectId,
-        required:true,
-        ref:'Users'
-    }
+    // CreatedBy :{
+    //     type:mongoose.SchemaTypes.ObjectId,
+    //     required:true,
+    //     ref:'Users'
+    // }
 }, {
     timestamps: true
 });
